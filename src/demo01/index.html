@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="main-container">
+        <div class="game-container">
+            <h1 class="game-title">Snake Game</h1>
+            <div class="score-container">
+                <span class="score-label">Score:</span>
+                <span class="score-value" id="score">0</span>
+            </div>
+            <canvas id="gameCanvas" width="400" height="400"></canvas>
+            <div class="button-container">
+                <button id="startButton">Begine</button>
+                <button id="restartButton">Restart</button>
+                <button id="achievementButton" title="Achievements">👑</button>
+            </div>
+            <div class="achievement-panel" id="achievementPanel">
+                <h3>Achievements</h3>
+                <div class="achievement-progress">
+                    <div class="progress-bar" id="progressBar"></div>
+                    <span class="progress-text" id="progressText">0/10</span>
+                </div>
+                <div class="achievement-words" id="achievementWords"></div>
+            </div>
+            <div class="game-over" id="gameOver">
+                <h2>Game over</h2>
+                <p>Finally get: <span id="finalScore">0</span></p>
+            </div>
+        </div>
+        <div class="side-container">
+            <div class="words-container">
+                <h3>Collected Words:</h3>
+                <div class="words-box" id="wordsBox"></div>
+            </div>
+            <div class="poem-container" id="poemContainer">
+                <h3>Generated Poem:</h3>
+                <div class="poem" id="poem"></div>
+                <button id="remixButton" style="display: none;">Remix Poem</button>
+            </div>
+            <div class="image-container" id="imageContainer">
+                <h3>Generated Image:</h3>
+                <div class="image-box" id="imageBox"></div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

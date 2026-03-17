@@ -1,0 +1,390 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Courier New', monospace;
+    background-color: #000;
+    color: #0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    overflow: hidden;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.8));
+    z-index: -2;
+}
+
+body::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 255, 0, 0.15),
+        rgba(0, 255, 0, 0.15) 1px,
+        transparent 1px,
+        transparent 1px
+    );
+    animation: codeFlow 2s linear infinite;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* 为所有容器添加背景遮罩，使代码在容器上时颜色降低 */
+.game-container, .side-container, .words-container, .poem-container, .image-container, .button-container, button {
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(2px);
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes codeFlow {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(100%);
+    }
+}
+
+.main-container {
+    display: flex;
+    gap: 20px;
+    max-width: 1200px;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.game-container {
+    text-align: center;
+    padding: 20px;
+    border: 2px solid #0f0;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+    flex: 0 0 450px;
+}
+
+.side-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 500px;
+}
+
+.words-container {
+    margin-top: 0;
+    padding: 15px;
+    border: 1px solid #0f0;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.poem-container {
+    margin-top: 0;
+    padding: 15px;
+    border: 1px solid #0f0;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.image-container {
+    margin-top: 0;
+    padding: 15px;
+    border: 1px solid #0f0;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.game-title {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px #0f0;
+    animation: glow 1s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        text-shadow: 0 0 10px #0f0;
+    }
+    to {
+        text-shadow: 0 0 20px #0f0, 0 0 30px #0f0;
+    }
+}
+
+.score-container {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+.score-value {
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+#gameCanvas {
+    border: 2px solid #0f0;
+    background-color: #000;
+    cursor: none;
+}
+
+.button-container {
+    margin-top: 20px;
+    position: relative;
+}
+
+button {
+    background-color: #000;
+    color: #0f0;
+    border: 1px solid #0f0;
+    padding: 10px 20px;
+    margin: 0 10px;
+    font-family: 'Courier New', monospace;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+}
+
+#achievementButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 5px;
+    font-size: 1.2em;
+    margin: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+#achievementButton:hover {
+    background-color: #0f0;
+    color: #000;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.8);
+    transform: scale(1.1);
+}
+
+/* 美化滚动条 */
+.achievement-words::-webkit-scrollbar {
+    width: 8px;
+}
+
+.achievement-words::-webkit-scrollbar-track {
+    background: #030;
+    border-radius: 4px;
+}
+
+.achievement-words::-webkit-scrollbar-thumb {
+    background: #0f0;
+    border-radius: 4px;
+}
+
+.achievement-words::-webkit-scrollbar-thumb:hover {
+    background: #0c0;
+}
+
+button:hover {
+    background-color: #0f0;
+    color: #000;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.6);
+}
+
+.game-over {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 40px;
+    border: 2px solid #0f0;
+    border-radius: 10px;
+    box-shadow: 0 0 30px rgba(0, 255, 0, 0.7);
+    display: none;
+}
+
+.achievement-panel {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 30px;
+    border: 2px solid #0f0;
+    border-radius: 10px;
+    box-shadow: 0 0 30px rgba(0, 255, 0, 0.7);
+    display: none;
+    min-width: 300px;
+    z-index: 1000;
+}
+
+.achievement-panel h3 {
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px #0f0;
+    text-align: center;
+}
+
+.achievement-progress {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.progress-bar {
+    height: 10px;
+    background-color: #030;
+    border: 1px solid #0f0;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+
+.progress-bar::after {
+    content: '';
+    display: block;
+    height: 100%;
+    background-color: #0f0;
+    width: 0%;
+    transition: width 0.5s ease;
+}
+
+.progress-text {
+    display: block;
+    text-align: center;
+    font-size: 0.9em;
+}
+
+.achievement-words {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.achievement-word {
+    padding: 8px 12px;
+    background-color: #030;
+    border: 1px solid #0f0;
+    border-radius: 5px;
+    font-size: 0.9em;
+    animation: glow 1s ease-in-out infinite alternate;
+}
+
+.achievement-word.locked {
+    opacity: 0.5;
+    background-color: #111;
+    border-color: #060;
+}
+
+.achievement-word.unlocked {
+    opacity: 1;
+    background-color: #030;
+    border-color: #0f0;
+}
+
+.game-over h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px #0f0;
+}
+
+.game-over p {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+#finalScore {
+    font-weight: bold;
+    color: #0f0;
+}
+
+.words-container h3 {
+    margin-bottom: 10px;
+    text-shadow: 0 0 5px #0f0;
+}
+
+.words-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    min-height: 50px;
+    padding: 10px;
+    border: 1px solid #030;
+    border-radius: 3px;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.word-item {
+    padding: 5px 10px;
+    background-color: #030;
+    border: 1px solid #0f0;
+    border-radius: 3px;
+    font-size: 0.9em;
+    animation: glow 1s ease-in-out infinite alternate;
+}
+
+.poem-container h3 {
+    margin-bottom: 10px;
+    text-shadow: 0 0 5px #0f0;
+}
+
+.poem {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #030;
+    border-radius: 3px;
+    background-color: rgba(0, 0, 0, 0.3);
+    line-height: 1.5;
+    min-height: 100px;
+}
+
+.image-container h3 {
+    margin-bottom: 10px;
+    text-shadow: 0 0 5px #0f0;
+}
+
+.image-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+    padding: 10px;
+    border: 1px solid #030;
+    border-radius: 3px;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.image-box img {
+    max-width: 100%;
+    max-height: 300px;
+    border: 1px solid #0f0;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+}
