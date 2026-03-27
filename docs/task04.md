@@ -2,7 +2,8 @@
 
 Time：2026.3.28
 
-Author：
+Author：PHOENIX-collab-bot
+
 
 ## 一、核心目标：给型接入 AI 能力
 
